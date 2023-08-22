@@ -42,7 +42,7 @@ Por fim analisei a base de perfil de eleitorado, a fim de plotar e verificar a d
 Consegui observar que os dados aparentemente seguem uma ditribuição normal ou algo muito aproximado, seria interessante em uma análise futura verificar a normalidade dos dados usando testes estatístico que descrevi no pdf, e se comprovarmos tal fato através do p-valor, podemos utilizar metodologias mais profundas ou partir para análises não paramétricas, criando modelos de previsão para o segundo turno, modelando resultados e realizando testes de hipóteses.
 Outra sugestão seria verificar a correlação entre variáveis(lembrando que não implicam em causalidade), e verificar a assimetria e curtose das distribuições encontradas.
 
-# Códigos comentados para replicação (R e Python).
+# Códigos comentados para replicação (R e Python)
 
 #Bibliotecas que iremos utilizar, todas devem ser instaladas usando o comando install.packages("")
 
@@ -103,6 +103,7 @@ print(resultado_final,n=nrow(resultado_final))
 View(resultado_final)
 
 #--------------------------------------------------------------------------------------------
+
 #Qual município o candidato foi mais votado
 
 #Separando infos dos candidatos
