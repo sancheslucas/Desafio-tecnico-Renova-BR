@@ -13,7 +13,7 @@ O desafio propôs a análise do estado de São Paulo e seus municípios, então 
 Percebi que a coluna SG_PARTIDO possuia valores com caracteres especiais (#NULO#), tive que mudá-los para não prejudicar o código de programação e melhorar a visualização da base.
 
 Para isso selecionei a coluna e fiz uso da ferramente localizar e substituir, para alterar todas as células de uma vez para "NULO". Já com essa ferramente podemos observar o somatório de votos NULOS.
-Fiz o mesmo para a variável NM_VOTAVEL, padronizei "Branco" para "BRANCO" a fim de manter um padrão em toda a base.
+Fiz o mesmo para a variável NM_VOTAVEL, substituí "Branco" para "BRANCO" a fim de padronizar toda a base.
 Tais colunas como NM_VOTAVEL possuem esse voto em branco, porém não julguei sendo uma variável que devemos excluir a linha correspondente porque ela pode trazer insights futuros.
 Através do comando ctrl+shift+space selecionei todos os dados, na aba "inserir" selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados estão disponíveis no repositório em formato xlsx.
 
