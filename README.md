@@ -15,7 +15,7 @@ Percebi que a coluna SG_PARTIDO possuia valores com caracteres especiais (#NULO#
 Para isso selecionei a coluna e fiz uso da ferramente localizar e substituir, para alterar todas as células de uma vez para "NULO". Já com essa ferramente podemos observar o somatório de votos NULOS.
 Fiz o mesmo para a variável NM_VOTAVEL, padronizei "Branco" para "BRANCO" a fim de manter um padrão em toda a base.
 Tais colunas como NM_VOTAVEL possuem esse voto em branco, porém não julguei sendo uma variável que devemos excluir a linha correspondente porque ela pode trazer insights futuros.
-Através do comando ctrl+shift+space selecionei todos os dados, na aba inserir selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados são essas que eu disponibilizei no repositório.
+Através do comando ctrl+shift+space selecionei todos os dados, na aba "inserir" selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados são essas que eu disponibilizei no repositório.
 
 # Uso de programação (R e Python)
 A partir do tópico pedido um JOIN, comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagem são extremamente parecidas, e o R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais. Porém ainda sim, forneci o respectivo código em linguagem Python no final de deste e do pdf.
