@@ -1,5 +1,6 @@
 # Desafio-tecnico-Renova-BR-Lucas
 Este repositório contém as bases de dados em formato Excel, um README em formato pdf com todos os passo a passos de como desenvolvi o desafio e quais ferramentas utilizei.
+
 Aqui se encontra mais um README como foi solicitado, a única diferença é que este não possui os resultados em si (o pdf possui), apenas meus pensamentos e códigos.
 
 # Uso do Excel
