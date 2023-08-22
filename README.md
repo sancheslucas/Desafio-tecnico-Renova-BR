@@ -1,46 +1,49 @@
 # Desafio-tecnico-Renova-BR-Lucas
-Este repositório contém as bases de dados em formato Excel, um README em formato pdf com todos os passo a passos de como desenvolvi o desafio e quais ferramentas utilizei.
+Este repositório contém as bases de dados em formato Excel, um README em formato pdf com todos os passo a passos de como desenvolvi o desafio e quais ferramentas utilizei e os resultados encontrados.
 
-Aqui se encontra mais um README como foi solicitado, a única diferença é que este não possui os resultados em si (o pdf possui), apenas meus pensamentos e códigos.
+Este é mais um README como foi solicitado, a única diferença é que não possui os resultados em si (apenas o pdf possui), apenas meus pensamentos e códigos.
 
 # Uso do Excel
-O primeiro passo foi escolher a ferramenta para tratar os dados. Escolhi o Excel e o primeiro passo foi eliminar/deletar colunas que não seriam interessantes para a análise.
-A maioria das colunas deletadas se deve por serem "duplicadas", como por exemplo o código que representa alguma descrição de outra coluna, foi preferível excluir a coluna de código e manter a descrição, uma vez que facilitaria a visualização.
-As outras variáveis que não eram desse tipo, acabaram sendo excluídas por serem redundantes, ou nocivas para uma possível análise futura(maiores explicações no README em pdf).
+O primeiro passo foi escolher a ferramenta para tratar os dados. Escolhi o Excel e o decidi eliminar/deletar colunas que não seriam interessantes para a análise.
+A maioria das colunas deletadas se deve por serem "duplicadas", como por exemplo o código (CD) que representa alguma descrição (DS) de outra coluna, foi preferível excluir a coluna de código e manter a descrição, uma vez que facilitaria a visualização.
+As outras variáveis que não eram desse tipo, acabaram sendo excluídas por serem redundantes, ou nocivas para uma possível análise futura (maiores explicações no README em pdf).
 
-Ainda tratando as bases, foi necessário formatar todas as células de cada coluna separadamente, garantindo que o valor contido na célula tenha esse mesmo formato, por exemplo, se o valor é uma variável quantitativa a coluna toda deve ser colocada em formaato de número.
-Se o valor da coluna representa uma variável qualitativa nominal, a coluna deve ser formatada para texto. E assim sucessivamente.
+Ainda tratando as bases, foi necessário formatar todas as células de cada coluna separadamente, garantindo que o valor contido na célula tenha esse mesmo formato. Por exemplo, se o valor é uma variável quantitativa discreta (como votos) a coluna toda deve ser colocada em formato de número.
+Se o valor da coluna representa uma variável qualitativa nominal (como nome dos candidatos), a coluna deve ser formatada para texto. E assim sucessivamente.
 O desafio propôs a análise do estado de São Paulo e seus municípios, então na base do perfil do eleitorado utilizei a filtragem do Excel na coluna SG_UF para manter apenas os dados de interesse.
 Percebi que a coluna SG_PARTIDO possuia valores com caracteres especiais (#NULO#), tive que mudá-los para não prejudicar o código de programação e melhorar a visualização da base.
 
-Para isso selecionei a coluna e fiz uso da ferramente localizar e substituir, para alterar todas as células de uma vez para "NULO". Já com essa ferramente podemos observar o somatório de votos NULOS.
+Para isso selecionei a coluna e fiz uso da ferramenta localizar e substituir, para alterar todas as células de uma vez para "NULO". Já com essa ferramenta podemos observar o somatório de votos NULOS.
 Fiz o mesmo para a variável NM_VOTAVEL, substituí "Branco" para "BRANCO" a fim de padronizar toda a base.
-Tais colunas como NM_VOTAVEL possuem esse voto em branco, porém não julguei sendo uma variável que devemos excluir a linha correspondente porque ela pode trazer insights futuros.
-Através do comando ctrl+shift+space selecionei todos os dados, na aba "inserir" selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados estão disponíveis no repositório em formato xlsx.
+Tais colunas como NM_VOTAVEL possuem esse voto em branco, porém não julguei sendo uma variável que devemos excluir a linha correspondente, pois ela pode trazer insights futuros.
+
+Mantive a coluna NR_ZONA pois poderia ser interessante uma análise espacial usando geoestatística, para verificar através de um gráfico de mapa como ficou a quantidade de votos por região. Porém para isso, iriamos precisar da localidade que cada zona representa.
+
+Através do comando "ctrl+shift+space" selecionei todos os dados, na aba "inserir" selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados estão disponíveis no repositório em formato xlsx.
 
 # Uso de programação (R e Python)
-A partir do tópico pedido um JOIN, comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagem são extremamente parecidas, e o R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais. Porém ainda sim, forneci o respectivo código em linguagem Python no final de deste e do pdf.
+A partir do tópico pedido (um JOIN), comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagens são extremamente parecidas. O R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais e análise de dados, com uma única desvantagem de tempo que leva para rodar alguns códigos ou bases. Porém ainda sim, forneci o respectivo código em linguagem Python no final deste README e do pdf.
 
 Vou explicar agora meus pensamentos para o resto da análise e em seguida colocarei os códigos comentados para reprodução.
 Através do JOIN fiz duas tabelas, uma que representa qual candidato foi mais votado em cada município, e outra qual município o candidato X foi mais votado.
 Sobre qual perfil do eleitorado votou em cada candidato eu optei por não fazer, uma vez que estatísticamente o resultado final do JOIN poderia ser tendencioso e incorreto, mais explicações no arquivo pdf.
-Talvez a parte de montagem da base de dados e coleta de informações poderia ter sido planejada de forma mais eficiente.
+Talvez a parte de montagem da base de dados e coleta de informações poderia ter sido planejada e executada de forma mais eficiente.
 
-Para não finalizarmos aqui, decidi seguir a sugestão do desafio e tentar trazer novas ideias e insights dentro de uma análise exploratória de dados e métodos estatísticos.
+Para não finalizarmos aqui, decidi seguir a sugestão do desafio e tentar trazer novas ideias e insights, utilizando de uma análise exploratória de dados e métodos estatísticos.
 Através do RStudio decidi melhorar ainda mais a tabela da base do perfil, separando por municípios, faixas de cada variável e suas respectivas contagens. Desta forma podemos entender ainda melhor as respectivas quantidades dos eleitores em cada faixa no estado de São Paulo.
 
 Fiz uma análise geral sobre todos os candidatos de todos os municípios, a fim de encontrar suas colocações. Representei através de um gráfico de dispersão e depois um gráfico de linhas suavizado para melhor visualização.
 
 Agora calculando a porcentagem de votos em cada partido, decidi representar os valores através de um histograma e verificar a disparidade entre partidos.
 
-Penso que geralmente estaremos interessados em um município específico, por exemplo Campinas, São Paulo, etc, então separei o município de interesse (São Paulo) como exemplo, e fiz uma análise dentro dele, selecionando em uma tabela os 3 prefeitos mais votados e outra com os 3 vereadores mais votados, ambas com uma coluna adicional contendo o total de votos de cada um naquele município.
+Penso que geralmente estaremos interessados em um município específico, por exemplo Campinas, São Paulo, etc. Então separei o município de interesse (São Paulo) como exemplo, e fiz uma análise dentro dele, selecionando em uma tabela os 3 prefeitos mais votados e outra com os 3 vereadores mais votados, ambas com uma coluna adicional contendo o total de votos de cada um naquele município.
 Para melhor visualizção realizei um gráfico de barras, e um de pizza (apesar de nunca ser recomendado o  uso deste tipo de gráfico) para as duas situações.
 
 Seguindo a mesma lógica, criei agora as mesmas colunas porém relacionado a todos os candidatos da cidade de interesse, novamente separado entre prefeito e vereador, plotei as tabelas obtidas com o somatório dos votos de cada candidato e para visualização optei por um gráfico de dispersão e depois de radar.
 O gráfico de radar e sua interpretação foi melhor explicado no pdf, decidi o usar pois podemos verificar qual candidato se destaca mais na área de interesse.
 
 Por fim analisei a base de perfil de eleitorado, a fim de plotar e verificar a distribuição de cada característica dos eleitores, por exemplo, verificar a distribuição do gênero e do estado civil. Para isso tive que separar cada coluna de variável e plotar em um histograma com todas as faixas de interesse.
-Consegui observar que os dados aparentemente seguem uma ditribuição normal ou algo muito aproximado, seria interessante em uma análise futura verificar a normalidade dos dados usando testes estatístico que descrevi no pdf, e se comprovarmos tal fato através do p-valor, podemos utilizar metodologias mais profundas ou partir para análises não paramétricas, criando modelos de previsão para o segundo turno, modelando resultados e realizando testes de hipóteses.
+Consegui observar que os dados aparentemente seguem uma ditribuição normal ou algo muito aproximado, seria interessante em uma análise futura verificar a normalidade dos dados usando testes estatísticos que descrevi no pdf (como Jarque-Bera entre outros), e se comprovarmos tal fato através do p-valor, podemos utilizar metodologias mais profundas ou partir para análises não paramétricas se a normalidade não se verificar, criando modelos de previsão para o segundo turno, modelando resultados e realizando testes de hipóteses.
 Outra sugestão seria verificar a correlação entre variáveis(lembrando que não implicam em causalidade), e verificar a assimetria e curtose das distribuições encontradas.
 
 # Códigos comentados para replicação (R e Python)
