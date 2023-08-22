@@ -19,26 +19,33 @@ Através do comando ctrl+shift+space selecionei todos os dados, na aba "inserir"
 
 # Uso de programação (R e Python)
 A partir do tópico pedido um JOIN, comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagem são extremamente parecidas, e o R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais. Porém ainda sim, forneci o respectivo código em linguagem Python no final de deste e do pdf.
+
 Vou explicar agora meus pensamentos para o resto da análise e em seguida colocarei os códigos comentados para reprodução.
 Através do JOIN fiz duas tabelas, uma que representa qual candidato foi mais votado em cada município, e outra qual município o candidato X foi mais votado.
 Sobre qual perfil do eleitorado votou em cada candidato eu optei por não fazer, uma vez que estatísticamente o resultado final do JOIN poderia ser tendencioso e incorreto, mais explicações no arquivo pdf.
-Talvez a parte de montagem da base de dados e coleta de informações poderia ter sido pensada melhor.
+Talvez a parte de montagem da base de dados e coleta de informações poderia ter sido planejada de forma mais eficiente.
 
 Para não finalizarmos aqui, decidi seguir a sugestão do desafio e tentar trazer novas ideias e insights dentro de uma análise exploratória de dados e métodos estatísticos.
 Através do RStudio decidi melhorar ainda mais a tabela da base do perfil, separando por municípios, faixas de cada variável e suas respectivas contagens. Desta forma podemos entender ainda melhor as respectivas quantidades dos eleitores em cada faixa no estado de São Paulo.
+
 Fiz uma análise geral sobre todos os candidatos de todos os municípios, a fim de encontrar suas colocações. Representei através de um gráfico de dispersão e depois um gráfico de linhas suavizado para melhor visualização.
+
 Agora calculando a porcentagem de votos em cada partido, decidi representar os valores através de um histograma e verificar a disparidade entre partidos.
+
 Penso que geralmente estaremos interessados em um município específico, por exemplo Campinas, São Paulo, etc, então separei o município de interesse (São Paulo) como exemplo, e fiz uma análise dentro dele, selecionando em uma tabela os 3 prefeitos mais votados e outra com os 3 vereadores mais votados, ambas com uma coluna adicional contendo o total de votos de cada um naquele município.
 Para melhor visualizção realizei um gráfico de barras, e um de pizza (apesar de nunca ser recomendado o  uso deste tipo de gráfico) para as duas situações.
+
 Seguindo a mesma lógica, criei agora as mesmas colunas porém relacionado a todos os candidatos da cidade de interesse, novamente separado entre prefeito e vereador, plotei as tabelas obtidas com o somatório dos votos de cada candidato e para visualização optei por um gráfico de dispersão e depois de radar.
 O gráfico de radar e sua interpretação foi melhor explicado no pdf, decidi o usar pois podemos verificar qual candidato se destaca mais na área de interesse.
+
 Por fim analisei a base de perfil de eleitorado, a fim de plotar e verificar a distribuição de cada característica dos eleitores, por exemplo, verificar a distribuição do gênero e do estado civil. Para isso tive que separar cada coluna de variável e plotar em um histograma com todas as faixas de interesse.
 Consegui observar que os dados aparentemente seguem uma ditribuição normal ou algo muito aproximado, seria interessante em uma análise futura verificar a normalidade dos dados usando testes estatístico que descrevi no pdf, e se comprovarmos tal fato através do p-valor, podemos utilizar metodologias mais profundas ou partir para análises não paramétricas, criando modelos de previsão para o segundo turno, modelando resultados e realizando testes de hipóteses.
 Outra sugestão seria verificar a correlação entre variáveis(lembrando que não implicam em causalidade), e verificar a assimetria e curtose das distribuições encontradas.
 
-Códigos comentados para replicação (R e Python).
+# Códigos comentados para replicação (R e Python).
 
-#Bibliotecas que iremos utilizar
+#Bibliotecas que iremos utilizar, todas devem ser instaladas usando o comando install.packages("")
+
 library(dplyr)
 library(readxl)
 library(ggplot2)
