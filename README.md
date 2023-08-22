@@ -495,11 +495,8 @@ print(grafico_genero)
 #Importando o que vai ser necessário
 
 import pandas as pd
-
 import numpy as np
-
 import matplotlib.pyplot as plt
-
 import seaborn as sns
 
 #Lendo os dados tratados do Excel
@@ -528,7 +525,6 @@ resultado_final = dados_juntados.groupby('NM_MUNICIPIO').agg(Prefeito_mais_votad
                                                               Vereador_mais_votado=('NM_VOTAVEL_y', 'first'))
 
 print(resultado_final)
-
 print("Número de municípios:", resultado_final.shape[0])
 
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -542,7 +538,6 @@ cand_mun_mais_voto = cand_mun_mais_voto.groupby('NM_VOTAVEL').agg(Cargo=('DS_CAR
                                                                   Qt_De_Votos=('QT_VOTOS', 'max'))
 
 print(cand_mun_mais_voto)
-
 print("Número de candidatos:", cand_mun_mais_voto.shape[0])
 
 #---------------------------------------------------------------------------------------------------------------------------------
@@ -561,7 +556,6 @@ base2_consolidada = perfil_eleitorado_reduzido_sp_final.groupby(['NM_MUNICIPIO',
     Soma_QT_ELEITORES_INC_NM_SOCIAL=('QT_ELEITORES_INC_NM_SOCIAL', 'sum')).reset_index()
 
 print(base2_consolidada)
-
 print("Número de municípios:", base2_consolidada.shape[0])
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -574,6 +568,7 @@ descricao_geral = descricao_geral.sort_values(by='Qt_De_Votos', ascending=False)
 descricao_geral['Posicao'] = np.arange(1, descricao_geral.shape[0] + 1)
 
 #Gráfico de Dispersão
+
 plt.figure(figsize=(10, 6))
 sns.scatterplot(data=descricao_geral, x='Posicao', y='Qt_De_Votos', label='NM_VOTAVEL', color='blue')
 plt.title("Relação entre número de votos e posição do candidato")
@@ -583,6 +578,7 @@ plt.legend()
 plt.show()
 
 #Gráfico de Linhas
+
 plt.figure(figsize=(10, 6))
 sns.lineplot(data=descricao_geral, x='Posicao', y='Qt_De_Votos', color='blue')
 plt.title("Variação dos votos ao longo da contagem de candidatos")
