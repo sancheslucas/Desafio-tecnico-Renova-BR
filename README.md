@@ -3,7 +3,8 @@ Este repositório contém as bases de dados em formato Excel, um README em forma
 
 Este é mais um README como foi solicitado, a única diferença é que não possui os resultados em si (apenas o pdf possui), apenas meus pensamentos e códigos.
 
-# Uso do Excel
+# Pensamentos, desenvolvimento e ferramentas
+## Uso do Excel
 O primeiro passo foi escolher a ferramenta para tratar os dados. Escolhi o Excel e o decidi eliminar/deletar colunas que não seriam interessantes para a análise.
 A maioria das colunas deletadas se deve por serem "duplicadas", como por exemplo o código (CD) que representa alguma descrição (DS) de outra coluna, foi preferível excluir a coluna de código e manter a descrição, uma vez que facilitaria a visualização.
 As outras variáveis que não eram desse tipo, acabaram sendo excluídas por serem redundantes, ou nocivas para uma possível análise futura (maiores explicações no README em pdf).
@@ -21,7 +22,7 @@ Mantive a coluna NR_ZONA pois poderia ser interessante uma análise espacial usa
 
 Através do comando "ctrl+shift+space" selecionei todos os dados, na aba "inserir" selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados estão disponíveis no repositório em formato xlsx.
 
-# Uso de programação (R e Python)
+## Uso de programação (R e Python)
 A partir do tópico pedido (um JOIN), comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagens são extremamente parecidas. O R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais e análise de dados, com uma única desvantagem de tempo que leva para rodar alguns códigos ou bases. Porém ainda sim, forneci o respectivo código em linguagem Python no final deste README e do pdf.
 
 Vou explicar agora meus pensamentos para o resto da análise e em seguida colocarei os códigos comentados para reprodução.
