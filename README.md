@@ -43,6 +43,7 @@ Consegui observar que os dados aparentemente seguem uma ditribuição normal ou 
 Outra sugestão seria verificar a correlação entre variáveis(lembrando que não implicam em causalidade), e verificar a assimetria e curtose das distribuições encontradas.
 
 # Códigos comentados para replicação (R e Python)
+## R
 
 #Bibliotecas que iremos utilizar, todas devem ser instaladas usando o comando install.packages("")
 
@@ -486,6 +487,8 @@ print(grafico_genero)
 #Se comprovarmos aa normalidade dos dados, outros testes estatísticos podem ser realizados para uma análise mais profunda.
 
 #Se existir alguma tabela feita que interesse estar em formato excel, é possível usar comandos para gerá-las, para isso basta usar a biblioteca library(openxlsx).
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Python
 
