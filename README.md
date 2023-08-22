@@ -2,19 +2,23 @@
 Este repositório contém as bases de dados em formato Excel, um README em formato pdf com todos os passo a passos de como desenvolvi o desafio e quais ferramentas utilizei.
 Aqui se encontra mais um README como foi solicitado, a única diferença é que este não possui os resultados em si (o pdf possui), apenas meus pensamentos e códigos.
 
+# Uso do Excel
 O primeiro passo foi escolher a ferramenta para tratar os dados. Escolhi o Excel e o primeiro passo foi eliminar/deletar colunas que não seriam interessantes para a análise.
 A maioria das colunas deletadas se deve por serem "duplicadas", como por exemplo o código que representa alguma descrição de outra coluna, foi preferível excluir a coluna de código e manter a descrição, uma vez que facilitaria a visualização.
 As outras variáveis que não eram desse tipo, acabaram sendo excluídas por serem redundantes, ou nocivas para uma possível análise futura(maiores explicações no README em pdf).
+
 Ainda tratando as bases, foi necessário formatar todas as células de cada coluna separadamente, garantindo que o valor contido na célula tenha esse mesmo formato, por exemplo, se o valor é uma variável quantitativa a coluna toda deve ser colocada em formaato de número.
 Se o valor da coluna representa uma variável qualitativa nominal, a coluna deve ser formatada para texto. E assim sucessivamente.
 O desafio propôs a análise do estado de São Paulo e seus municípios, então na base do perfil do eleitorado utilizei a filtragem do Excel na coluna SG_UF para manter apenas os dados de interesse.
 Percebi que a coluna SG_PARTIDO possuia valores com caracteres especiais (#NULO#), tive que mudá-los para não prejudicar o código de programação e melhorar a visualização da base.
+
 Para isso selecionei a coluna e fiz uso da ferramente localizar e substituir, para alterar todas as células de uma vez para "NULO". Já com essa ferramente podemos observar o somatório de votos NULOS.
 Fiz o mesmo para a variável NM_VOTAVEL, padronizei "Branco" para "BRANCO" a fim de manter um padrão em toda a base.
 Tais colunas como NM_VOTAVEL possuem esse voto em branco, porém não julguei sendo uma variável que devemos excluir a linha correspondente porque ela pode trazer insights futuros.
 Através do comando ctrl+shift+space selecionei todos os dados, na aba inserir selecionei "tabela" a fim de solucionar o segundo tópico proposto. Tais tabelas com os dados tratados são essas que eu disponibilizei no repositório.
 
-A partir do tópicoo pedido um JOIN, comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagem são extremamente parecidas, e o R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais. Porém ainda sim, forneci o respectivo código em linguagem Python no final de deste e do pdf.
+# Uso de programação (R e Python)
+A partir do tópico pedido um JOIN, comecei a realizar as análises dentro do software estatístico R ao invés de Python, isso porque as linguagem são extremamente parecidas, e o R é focado em análise de dados e métodos estatísticos, essencial para dados eleitorais. Porém ainda sim, forneci o respectivo código em linguagem Python no final de deste e do pdf.
 Vou explicar agora meus pensamentos para o resto da análise e em seguida colocarei os códigos comentados para reprodução.
 Através do JOIN fiz duas tabelas, uma que representa qual candidato foi mais votado em cada município, e outra qual município o candidato X foi mais votado.
 Sobre qual perfil do eleitorado votou em cada candidato eu optei por não fazer, uma vez que estatísticamente o resultado final do JOIN poderia ser tendencioso e incorreto, mais explicações no arquivo pdf.
@@ -48,7 +52,7 @@ read_excel("C:/Users/romba/OneDrive/Área de Trabalho/SP_turno_1-reduzido
 final.xlsx")
 View(SP_turno_1_reduzido_final)
 #-----------------------------------------------------------------------------------------------
----
+
 #Qual candidato foi mais votado em cada município
 #Filtrando os cargos 
 dados_prefeito <- SP_turno_1_reduzido_final %>%
