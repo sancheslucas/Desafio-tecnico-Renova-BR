@@ -487,3 +487,149 @@ print(grafico_genero)
 
 #Se existir alguma tabela feita que interesse estar em formato excel, é possível usar comandos para gerá-las, para isso basta usar a biblioteca library(openxlsx).
 
+# Python
+
+#Importando o que vai ser necessário
+
+import pandas as pd
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+#Lendo os dados tratados do Excel
+
+perfil_eleitorado_reduzido_sp_final = pd.read_excel("C:/Users/romba/OneDrive/Área de Trabalho/perfil eleitorado reduzido sp final.xlsx")
+
+SP_turno_1_reduzido_final = pd.read_excel("C:/Users/romba/OneDrive/Área de Trabalho/SP_turno_1-reduzido final.xlsx")
+
+#-----------------------------------------------------------------------------------------------------------------------------
+
+#Qual candidato foi mais votado em cada município
+
+dados_prefeito = SP_turno_1_reduzido_final[SP_turno_1_reduzido_final['DS_CARGO_PERGUNTA'] == "Prefeito"]
+
+dados_vereador = SP_turno_1_reduzido_final[SP_turno_1_reduzido_final['DS_CARGO_PERGUNTA'] == "Vereador"]
+
+pref_mais_vot = dados_prefeito.groupby('NM_MUNICIPIO')['NM_VOTAVEL'].apply(lambda x: x[x.index[x['QT_VOTOS'] == x['QT_VOTOS'].max()][0]])
+
+vere_mais_vot = dados_vereador.groupby('NM_MUNICIPIO')['NM_VOTAVEL'].apply(lambda x: x[x.index[x['QT_VOTOS'] == x['QT_VOTOS'].max()][0]])
+
+dados_juntados = pd.merge(dados_prefeito, pref_mais_vot, on='NM_MUNICIPIO')
+
+dados_juntados = pd.merge(dados_juntados, vere_mais_vot, on='NM_MUNICIPIO')
+
+resultado_final = dados_juntados.groupby('NM_MUNICIPIO').agg(Prefeito_mais_votado=('NM_VOTAVEL_x', 'first'),
+                                                              Vereador_mais_votado=('NM_VOTAVEL_y', 'first'))
+
+print(resultado_final)
+
+print("Número de municípios:", resultado_final.shape[0])
+
+#--------------------------------------------------------------------------------------------------------------------------------
+
+#Qual município o candidato foi mais votado
+
+cand_mun_mais_voto = pd.concat([dados_prefeito, dados_vereador], ignore_index=True)
+
+cand_mun_mais_voto = cand_mun_mais_voto.groupby('NM_VOTAVEL').agg(Cargo=('DS_CARGO_PERGUNTA', 'first'),
+                                                                  Cidade_Mais_Votado=('NM_MUNICIPIO', lambda x: x[x.index[x['QT_VOTOS'] == x['QT_VOTOS'].max()][0]]),
+                                                                  Qt_De_Votos=('QT_VOTOS', 'max'))
+
+print(cand_mun_mais_voto)
+
+print("Número de candidatos:", cand_mun_mais_voto.shape[0])
+
+#---------------------------------------------------------------------------------------------------------------------------------
+
+#Melhor visualização dos perfis
+
+base1_consolidada = SP_turno_1_reduzido_final.drop_duplicates(subset='NM_MUNICIPIO', keep='first')
+
+base2_consolidada = perfil_eleitorado_reduzido_sp_final.groupby(['NM_MUNICIPIO', 'DS_FAIXA_ETARIA']).agg(
+    Soma_QT_ELEITORES_PERFIL=('QT_ELEITORES_PERFIL', 'sum'),
+    Soma_QT_ELEITORES_DEFICIENCIA=('QT_ELEITORES_DEFICIENCIA', 'sum'),
+    Estados_Civis_Unicos=('DS_ESTADO_CIVIL', lambda x: ', '.join(np.unique(x))),
+    Contagem_Estados_Civis=('DS_ESTADO_CIVIL', lambda x: ', '.join(map(str, x.value_counts().tolist()))),
+    Generos_Unicos=('DS_GENERO', lambda x: ', '.join(np.unique(x))),
+    Contagem_Generos=('DS_GENERO', lambda x: ', '.join(map(str, x.value_counts().tolist()))),
+    Soma_QT_ELEITORES_INC_NM_SOCIAL=('QT_ELEITORES_INC_NM_SOCIAL', 'sum')).reset_index()
+
+print(base2_consolidada)
+
+print("Número de municípios:", base2_consolidada.shape[0])
+
+#-------------------------------------------------------------------------------------------------------------------------------
+
+#Análises gerais
+
+descricao_geral = cand_mun_mais_voto.copy()
+descricao_geral['Qt_De_Votos'] = pd.to_numeric(descricao_geral['Qt_De_Votos'])
+descricao_geral = descricao_geral.sort_values(by='Qt_De_Votos', ascending=False)
+descricao_geral['Posicao'] = np.arange(1, descricao_geral.shape[0] + 1)
+
+#Gráfico de Dispersão
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=descricao_geral, x='Posicao', y='Qt_De_Votos', label='NM_VOTAVEL', color='blue')
+plt.title("Relação entre número de votos e posição do candidato")
+plt.xlabel("Posição do candidato")
+plt.ylabel("Total de votos")
+plt.legend()
+plt.show()
+
+#Gráfico de Linhas
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=descricao_geral, x='Posicao', y='Qt_De_Votos', color='blue')
+plt.title("Variação dos votos ao longo da contagem de candidatos")
+plt.xlabel("Contagem de candidatos")
+plt.ylabel("Total de votos")
+plt.show()
+
+#----------------------------------------------------------------------------------------------------------------------------
+
+#Análise dos partidos mais votados
+
+partidos_mais_votados = SP_turno_1_reduzido_final.groupby('SG_PARTIDO')['QT_VOTOS'].sum().reset_index()
+partidos_mais_votados = partidos_mais_votados.sort_values(by='QT_VOTOS', ascending=False)
+partidos_mais_votados['Porcentagem_Votos'] = (partidos_mais_votados['QT_VOTOS'] / partidos_mais_votados['QT_VOTOS'].sum()) * 100
+
+print(partidos_mais_votados)
+print("Número de partidos:", partidos_mais_votados.shape[0])
+
+plt.figure(figsize=(10, 6))
+sns.barplot(data=partidos_mais_votados, x='SG_PARTIDO', y='Porcentagem_Votos', color='blue')
+plt.title("Partidos mais votados")
+plt.xlabel("Partido")
+plt.ylabel("Porcentagem de votos (%)")
+plt.xticks(rotation=45, ha='right')
+plt.show()
+
+#------------------------------------------------------------------------------------------------------------------------------
+
+#Sugestões de análises do banco de perfil do eleitorado
+
+base_sp = base2_consolidada[base2_consolidada['NM_MUNICIPIO'] == "SÃO PAULO"]
+base_sp_percentual = base_sp.copy()
+base_sp_percentual['Porcentagem'] = (base_sp_percentual['Soma_QT_ELEITORES_PERFIL'] / base_sp_percentual['Soma_QT_ELEITORES_PERFIL'].sum()) * 100
+
+plt.figure(figsize=(10, 6))
+sns.barplot(data=base_sp_percentual, x='DS_FAIXA_ETARIA', y='Porcentagem', hue='Contagem_Estados_Civis')
+plt.title("Porcentagem de eleitores por estado civil em São Paulo")
+plt.xlabel("Faixa etária")
+plt.ylabel("Porcentagem (%)")
+plt.legend(title="Estado Civil")
+plt.xticks(rotation=45, ha='right')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+sns.barplot(data=base_sp_percentual, x='DS_FAIXA_ETARIA', y='Porcentagem', hue='Contagem_Generos')
+plt.title("Porcentagem de eleitores por gênero em São Paulo")
+plt.xlabel("Faixa etária")
+plt.ylabel("Porcentagem (%)")
+plt.legend(title="Gênero")
+plt.xticks(rotation=45, ha='right')
+plt.show()
+
+
